@@ -1,0 +1,55 @@
+﻿GMX,GMX,Methane gas reading,GMX_1,%,1,1
+RPM,RPM,Cuttinghead RPM,RPM_1,RPM,1,1
+RTD,RTD,M2 water temperature reading,RTD_2,°C,1,1
+RTD,RTD,M3 water temperature reading,RTD_3,°C,1,1
+CTX,CTX,M1 boost pump current reading,CTX_1,,1,1
+CTX,CTX,M2 propulsion current reading,CTX_2,,1,1
+CTX,CTX,M3 main drive current reading,CTX_3,,1,1
+CTX,CTX,TBM total current reading,CTX_4,,1,1
+POT,POT,Water pump flow setting,POT_1,,1,1
+POT,POT,Soap pump flow setting,POT_2,,1,1
+POT,POT,Air valve flow setting,POT_3,,1,1
+PTX,PTX,Propulsion cylinder 1 pressure,PTX_1,Bar,1,1
+PTX,PTX,Propulsion cylinder 2 pressure,PTX_2,Bar,1,1
+PTX,PTX,Propulsion cylinder 3 pressure,PTX_3,Bar,1,1
+PTX,PTX,Propulsion cylinder 4 pressure,PTX_4,Bar,1,1
+PTX,PTX,Propulsion cylinder 5 pressure,PTX_5,Bar,1,1
+PTX,PTX,Propulsion cylinder 6 pressure,PTX_6,Bar,1,1
+PTX,PTX,Propulsion cylinder 7 pressure,PTX_7,Bar,1,1
+PTX,PTX,Propulsion cylinder 8 pressure,PTX_8,Bar,1,1
+PTX,PTX,Propulsion cylinder 9 pressure,PTX_9,Bar,1,1
+PTX,PTX,Main drive pump pressure,PTX_10,Bar,1,1
+PTX,PTX,GCS air supply pressure,PTX_11,Bar,1,1
+PTX,PTX,GCS injection pressure line,PTX_12,Bar,1,1
+EPB,EPB,Earth pressure Face 1,EPB_1,Bar,1,1
+EPB,EPB,Earth pressure Face 2,EPB_2,Bar,1,1
+EXT,EXT,Propulsion cylinder extension,EXT_1,mm,1,1
+Torque,Torque,Torque,Torque,Tonne*m,1,1
+Water,Water,Water,Water,l/mm,1,1
+Soap,Soap,Soap,Soap,l/mm,1,1
+Air,Air,Air,Air,l/mm,1,1
+ROA,ROA,Rate of Avance,ROA,mm/min,1,1
+Thrust,Thrust,Thrust,Thrust,Tonne,1,1
+FER,FER,FER,FER,,1,1
+FIR,FIR,FIR,FIR,,1,1
+LSW,LSW,Bearing grease block plunger,LSW_5,,1,1
+LSW,LSW,Seal grease block plunger,LSW_6,,1,1
+LSW,LSW,Propulsion neutral,LSW_7A,,1,1
+LSW,LSW,Propulsion stroke,LSW_7B,,1,1
+LSW,LSW,PRG neutral,LSW_8,,1,1
+LSW,LSW,Belt conveyor neutral,LSW_9A,,1,1
+LSW,LSW,Belt conveyor stroke,LSW_9B,,1,1
+LSW,LSW,Erector axial travel,LSW_10,,1,1
+LSW,LSW,Erector rotation,LSW_11,,1,1
+LSW,LSW,Main drive neutral,LSW_12A,,1,1
+LSW,LSW,Main drive stroke,LSW_12B,,1,1
+PSL,PSL,Boost pump inlet filter pressure low,PSL_1_L,,1,1
+PSL,PSL,Boost pump inlet filter pressure OK,PSL_1_H,,1,1
+PSL,PSL,Boost pump outlet filter pressure low,PSL_2_L,,1,1
+PSL,PSL,Boost pump outlet filter pressure high,PSL_2_H,,1,1
+PSL,PSL,Main drive hydraulic pump 1 ,PSL_3,,1,1
+PSL,PSL,Main drive hydraulic pump 2,PSL_4,,1,1
+PSL,PSL,Main drive hydraulic pump 3,PSL_5,,1,1
+PSL,PSL,Main drive hydraulic pump 4,PSL_6,,1,1
+PSL,PSL,Cuttinghead rotation - CW,PSL_7,Hours,1,1
+PSL,PSL,Cuttinghead rotation - CCW,PSL_8,Hours,1,1

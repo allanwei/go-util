@@ -1,0 +1,10 @@
+{
+    "connections":{
+        "groundcastdb":"server=172.16.31.76;user id=sa;password=server#123;port=1433;database=DataLogger"
+    },
+    "delay":"10s",
+    "debug":true,
+    "executable":"go-insert.exe",
+    "log":"c:/temp/eum.log",
+    "CurrentNum":1
+}
