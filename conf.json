@@ -6,5 +6,5 @@
     "debug":true,
     "executable":"go-insert.exe",
     "log":"c:/temp/eum.log",
-    "CurrentNum":1
+    "CurrentNum":1570
 }

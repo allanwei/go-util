@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math/rand"
 	"sync"
 	"bufio"
 	"encoding/csv"
@@ -12,7 +13,7 @@ import (
 	"github.com/allanwei/gcwebapis-util"
 	//"github.com/allanwei/gocron"
 	//"fmt"
-	"strconv"
+	//"strconv"
 	"time"
 	"runtime"
 	"runtime/debug"
@@ -67,6 +68,48 @@ func loadConfig() (delay string,executable string,log string,currentNum int) {
 	return 
 
 }
+func randint() int {
+	rand.Seed(time.Now().UnixNano())
+	i :=rand.Intn(2)
+	
+	return i
+}
+func randfloat() float64 {
+	rand.Seed(time.Now().UnixNano())
+	f := rand.Float64()
+	
+	return f
+
+}
+func savetofile(t string,n,f int){
+	stv:=fmt.Sprintf(`INSERT INTO [dbo].[Data_Table]([Time_Stamp],[GMX_1],[RPM_1],[RTD_2],[RTD_3],
+		[CTX_1],[CTX_2],[CTX_3],[CTX_4],
+		[POT_1],[POT_2],[POT_3],
+		[PTX_1],[PTX_2],[PTX_3],[PTX_4],[PTX_5],[PTX_6],[PTX_7],[PTX_8],[PTX_9],[PTX_10],[PTX_11],[PTX_12],
+		[EPB_1],[EPB_2],[EXT_1],[Torque],[Water],[Soap],[Air],[ROA],[Thrust],
+		[PIPE_No],[FER],[FIR],
+		[LSW_5],[LSW_6],[LSW_7A],[LSW_7B],[LSW_8],[LSW_9A],[LSW_9B],[LSW_10],[LSW_11],[LSW_12A],[LSW_12B],[PSL_1_L],
+		[PSL_1_H],[PSL_2_L],[PSL_2_H],[PSL_3],[PSL_4],[PSL_5],[PSL_6],[PSL_7],[PSL_8],[PIPE_PUSH])
+	VALUES('%s',%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d,%f,
+	%f,%f,%f,%f,%d,%f,%f,%f,%f,%f,%f,%d,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%d)`, t, randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), n, randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), randint(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randint(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(), randfloat(),
+		randfloat(), randfloat(), randfloat(), f)
+
+	
+		file, err := os.Create("result.sql")
+		if err !=nil{
+			log.Fatal(err)
+		}
+		defer file.Close()
+	
+		file.WriteString(stv)
+		file.Sync()
+}
 type csvline struct {
 	System     string
 	SystenDesc string
@@ -100,9 +143,9 @@ func work(s  time.Time,r chan int,c chan int,execfile string,logfile string){
 		defer recovery(logfile)
 		defer wg.Done()
 		writeTolog(logfile,fmt.Sprintf("current pipepush= %d; time=%s; pushflag=%d; count=%d",rnumber,n,pushflag,count))
-		ir:= strconv.Itoa(rnumber)
-		ipf:=strconv.Itoa(pushflag)
-		cmd := exec.Command(execfile,n,ir,ipf)
+		
+		savetofile(n,rnumber,pushflag)
+		cmd := exec.Command(execfile)
 		if err := cmd.Start();err !=nil{
 			writeTolog(logfile,err.Error())
 		}
@@ -246,6 +289,10 @@ func run(){
 	ScheduleTest(duration,num,execfile,logfile)
 }
 func main() {
+	args :=os.Args
+	if len(args)>1{
+		run()
+	}else{
 	_,_,logfile,_:=loadConfig()
 	svcConfig :=&service.Config{
 		Name : "GroundCastemulator",
@@ -261,5 +308,6 @@ func main() {
 	if err != nil{
 		writeTolog(logfile,err.Error())
 	}
+}
 	
 }

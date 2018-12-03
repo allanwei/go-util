@@ -1,31 +1,47 @@
 package main
 
 import (
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"time"
 
 	"github.com/allanwei/gcwebapis-db"
+
 	//"github.com/allanwei/gcwebapis-util"
 	"fmt"
 	"os"
-	"strconv"
 )
 
 func main() {
-	args := os.Args
-	t := args[1]
-	n, err := strconv.Atoi(args[2])
-	if err != nil {
-		log.Fatal(err)
+	if _, err := os.Stat("result.sql"); err == nil {
+
+		data, err := ioutil.ReadFile("result.sql")
+		if err != nil {
+			log.Fatal(err)
+		}
+		sql := string(data)
+		if err = execsql(sql); err != nil {
+			log.Fatal(err)
+		}
+		if err = os.Remove("result.sql"); err != nil {
+			log.Fatal(err)
+		}
+
 	}
-	f, err := strconv.Atoi(args[3])
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err = insertTo(t, n, f); err != nil {
-		log.Fatal(err)
-	}
+	//args := os.Args
+	//t := args[1]
+	//n, err := strconv.Atoi(args[2])
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//f, err := strconv.Atoi(args[3])
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//if err = insertTo(t, n, f); err != nil {
+	//	log.Fatal(err)
+	//}
 
 }
 func randint() int {
@@ -37,6 +53,19 @@ func randfloat() float64 {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Float64()
 
+}
+func execsql(sql string) error {
+	con, err := db.CreateDBCon(nil)
+	if err != nil {
+		return err
+	}
+	defer con.Close()
+	_, err = con.ExecuteQuery(sql)
+	if err != nil {
+		return err
+	}
+	//runtime.Goexit()
+	return nil
 }
 func insertTo(t string, n, f int) error {
 	con, err := db.CreateDBCon(nil)
